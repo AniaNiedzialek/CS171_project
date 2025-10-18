@@ -9,7 +9,7 @@
 This project focuses on applying machine learning and computer vision to analyze movement patterns in West Coast Swing (WCS) dance videos.  
 The goal is to detect and compare specific dance patterns—such as Sugar Push and Sugar Tag—across different competition divisions (e.g., Newcomer, Intermediate, Advanced, All-Star, Champion).  
 We aim to identify stylistic differences and explore whether measurable motion features correlate with dancer experience level, ultimately suggesting data-driven feedback for improvement.
----
+
 ### Project Outline/Plan
 1. **Data Preparation**
    - Collect short, clearly defined video clips of Sugar Push and Sugar Tag patterns from publicly available YouTube footage or self-recorded examples.
@@ -50,11 +50,11 @@ We aim to identify stylistic differences and explore whether measurable motion f
 ### Project Timeline
 | Week | Milestone | Description |
 |------|------------|-------------|
-| 1 | **Topic Approval & Setup** | Finalize the research question, confirm tools (PyTorch, torchvision, ffmpeg), and collect initial reference videos for Sugar Push and Sugar Tag patterns. |
-| 2 | **Data Collection & Labeling** | Download and trim selected WCS clips using `yt-dlp` and `ffmpeg`. Create `labels.csv` with pattern and division labels. |
-| 3 | **Frame Extraction & Dataset Preparation** | Sample frames (8–16 per clip), organize datasets into train/val/test splits, and verify class balance. |
-| 4 | **Model Development & Training** | Implement and train the CNN (ResNet18 backbone) for dual classification tasks: pattern and division. Optionally test a small MLP on pose-based features. |
-| 5 | **Evaluation & Report** | Generate accuracy and confusion matrix results, visualize feature attention (Grad-CAM), and write the final report + presentation slides. |
+| 10/13 | Topic Approval & Setup | Finalize the research question, confirm tools (PyTorch, torchvision, ffmpeg), and collect initial reference videos for Sugar Push and Sugar Tag patterns. |
+| 10/20 | Data Collection & Labeling | Download and trim selected WCS clips using `yt-dlp` and `ffmpeg`. Create `labels.csv` with pattern and division labels. |
+| 10/27 | Frame Extraction & Dataset Preparation | Sample frames (8–16 per clip), organize datasets into train/val/test splits, and verify class balance. |
+| 11/03 | Model Development & Training | Implement and train the CNN (ResNet18 backbone) for dual classification tasks: pattern and division. Optionally test a small MLP on pose-based features. |
+| 11/10 | Evaluation & Report | Generate accuracy and confusion matrix results, visualize feature attention (Grad-CAM), and write the final report + presentation slides. |
 ---
 ### .gitignore and License
 **.gitignore**
