@@ -1,2 +1,2 @@
-id,url,start_time,duration,action_class,dance_style,labels,division,pattern
-1,https://www.youtube.com/shorts/dWQqGDk8ygc,0,4,dance,west_coast_swing,sugar_push,beginner,basic_triple_triple
+id,youtube_id,start_time,duration,action_class,dance_style,labels,division,pattern
+1,dWQqGDk8ygc,0,4,dance,west_coast_swing,sugar_push,beginner,basic_triple_triple
