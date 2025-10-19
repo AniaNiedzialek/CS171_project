@@ -1,0 +1,4 @@
+venv
+.DS_Store
+*.mp4
+data/raw/videos/
