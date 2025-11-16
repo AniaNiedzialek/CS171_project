@@ -1,3 +1,7 @@
 id,youtube_id,start_time,duration,action_class,dance_style,labels,division,pattern
-1,dWQqGDk8ygc,0,4,dance,west_coast_swing,sugar_push,beginner,basic_triple_triple
-
+1,dWQqGDk8ygc,0,4,dance,west_coast_swing,sugar_push,newcomer,basic_triple_triple
+2,30WvvwyAeRY,36,40,dance,west_coast_swing,sugar_tag,champion,basic_sugar_tag
+3,ydMg8IWP_WY,39,42,dance,west_coast_swing,sugar_push,intermediate,basic_sugar_tag
+4,E2Es5buSd0M,40,43,dance,west_coast_swing,sugar_tag,intermediate,basic_sugar_tag
+5,VS0Cb7NoeRo,44,48,dance,west_coast_swing,sugar_push,novice,basic_triple_triple
+6,g2Q6Wwfo6eI,94,98,dance,west_coast_swing,sugar_tag,novice,basic_triple_triple
