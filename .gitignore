@@ -4,5 +4,4 @@ venv
 data/raw/videos/
 .env
 notebooks/.ipynb_checkpoints/01_data_collection-checkpoint.ipynb
-
-notebooks/.ipynb_checkpoints/
+notebooks/sanity_check.py
