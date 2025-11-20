@@ -52,18 +52,26 @@ We aim to identify stylistic differences and explore whether measurable motion f
 |------|------------|-------------|
 | 10/13 | Topic Approval & Setup | Finalize the research question, confirm tools (PyTorch, torchvision, ffmpeg), and collect initial reference videos for Sugar Push and Sugar Tag patterns. |
 | 10/20 | Data Collection & Labeling | Download and trim selected WCS clips using `yt-dlp` and `ffmpeg`. Create `labels.csv` with pattern and division labels. |
-| 10/27 | Frame Extraction & Dataset Preparation | Sample frames (8–16 per clip), organize datasets into train/val/test splits, and verify class balance. |
+| 10/27 | Frame Extraction & Dataset Preparation | Sample frames (8–16 per clip), organize datasets into train/test splits, and verify class balance. |
 | 11/03 | Model Development & Training | Implement and train the CNN (ResNet18 backbone) for dual classification tasks: pattern and division. Optionally test a small MLP on pose-based features. |
 | 11/10 | Evaluation & Report | Generate accuracy and confusion matrix results, visualize feature attention (Grad-CAM), and write the final report + presentation slides. |
 ---
+Updates:
+- collected data for two patterns for each division
+- extarcted images per each video and classified them based on pattern and adivision
+- prepared data for classification in the test and training loops
+
 ### .gitignore and License
-**.gitignore**
-pycache/
+**.gitignore - updated**
+venv
+.DS_Store
 *.mp4
-*.jpg
-*.csv
-*.npy
-*.pth
-*.ipynb_checkpoints
+data/raw/videos/
+.env
+notebooks/.ipynb_checkpoints/01_data_collection-checkpoint.ipynb
+notebooks/sanity_check.py
+__pycache__/.ipynb_checkpoints/
+models/*path
+
 
 **License:** MIT License — open for academic and research use only.
