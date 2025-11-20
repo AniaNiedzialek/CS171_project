@@ -4,7 +4,7 @@ import subprocess, os, glob, pathlib, shutil, sys
 INP = "data/raw/videos"
 OUT = "data/frames"
 N = 12
-SIZE = 256
+SIZE = 512
 
 def ensure_ffmpeg():
     if not shutil.which("ffmpeg"):
@@ -24,14 +24,17 @@ def main():
         outdir = pathlib.Path(OUT) / div / stem
         outdir.mkdir(parents=True, exist_ok=True)
 
-        vf = f"fps={N}/4,scale={SIZE}:{SIZE}:flags=lanczos"
+        # changing the size of the images
+        # vf = f"fps={N}/4,scale={SIZE}:{SIZE}:flags=lanczos"
+        vf = f"fps={N}/4,scale={SIZE}:-1:flags=lanczos,pad={SIZE}:{SIZE}:(ow-iw)/2:(oh-ih)/2"
+
         outpat = str(outdir / "%04d.jpg")
         print(f"→ {mp4}\n   out: {outdir}")
 
         # Skip if frames already exist
-        if any(outdir.glob("*.jpg")):
-            print("   (skip) frames already exist")
-            continue
+        # if any(outdir.glob("*.jpg")):
+        #     print("   (skip) frames already exist")
+        #     continue
 
         # Run ffmpeg and show stderr if it fails
         proc = subprocess.run(
