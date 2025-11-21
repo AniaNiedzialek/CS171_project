@@ -5,5 +5,6 @@ data/raw/videos/
 .env
 notebooks/.ipynb_checkpoints/01_data_collection-checkpoint.ipynb
 notebooks/sanity_check.py
-__pycache__/.ipynb_checkpoints/
+__pycache__/
+.ipynb_checkpoints/
 models/*path
