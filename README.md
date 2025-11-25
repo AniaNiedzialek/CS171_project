@@ -61,6 +61,45 @@ Updates:
 - extarcted images per each video and classified them based on pattern and adivision
 - prepared data for classification in the test and training loops
 
+### Notebooks Description
+#### Notebook 1 - 01_data_collection.ipynb
+purpose: Collects raw dance clips from YouTube and organizes them for modeling.
+The notebook:
+- extracts YouTube video IDs from different URL formats
+- downloads trimmed video segmens
+- creates and updates labels.csv with division, pattern, start time, duration, metadata
+- organizes dataset folders by division
+- batch-downloads all labeled clips
+
+#### Notebook 2 - 02_train.ipynb
+purpose: Train a CNN on extracted video frames to classify dance patterns.
+The notebook:
+- loads all extracted image frames
+- encodes labels (pattern to numberic ID)
+- builds ResNet18 with a custome final layer
+- applies data transforms and normalization
+- splits into train/test
+- trains the classifier and evaluates the accuracy
+- saves trained model checkpoint
+- loads model to make sample predictions
+
+#### Notebook 3 - 03_analyze_keypoints.ipynb
+purpose: analyze dancer movements using pose/keypoint data
+The notebook:
+- loads keypoint .npy files from each video
+- cleans missing keypoints via interpolation
+- normalizes body size via torso length
+- extracts motion features: angles, distances, velocities
+- aggregates features into a single vector per video
+- performs PCA and t-SNE to visualize pattern differences
+- runs kMeans clustering to see how videos group
+- saves clusternig pipeline
+- predicts cluster of new videos
+
+#### Notebook 4 - 04_cnn_analysis_visualization.ipynb
+purpose: analyze the trained CNN’s behavior.
+<!-- TO DO: add more when finished -->
+
 ### .gitignore and License
 **.gitignore - updated**
 venv
