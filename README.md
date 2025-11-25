@@ -98,7 +98,13 @@ The notebook:
 
 #### Notebook 4 - 04_cnn_analysis_visualization.ipynb
 purpose: analyze the trained CNN’s behavior.
-<!-- TO DO: add more when finished -->
+This notebook:
+- makes predictions based on the CNN model
+-  creaes confusion matrix
+- shows misclassified examples for further analysis
+- does grad-CAM attention visualizations
+- provides division-level accuracy
+- makes dance interpretation
 
 ### .gitignore and License
 **.gitignore - updated**
