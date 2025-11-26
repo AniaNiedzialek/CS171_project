@@ -17,3 +17,6 @@ mediapipe
 seaborn
 scikit-learn
 torchvision
+torch
+Pillow
+

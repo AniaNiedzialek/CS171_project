@@ -32,9 +32,9 @@ def main():
         print(f"→ {mp4}\n   out: {outdir}")
 
         # Skip if frames already exist
-        # if any(outdir.glob("*.jpg")):
-        #     print("   (skip) frames already exist")
-        #     continue
+        if any(outdir.glob("*.jpg")):
+            print(f"   (skip) {outdir} already has frames")
+            continue
 
         # Run ffmpeg and show stderr if it fails
         proc = subprocess.run(
