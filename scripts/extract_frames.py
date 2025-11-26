@@ -25,7 +25,6 @@ def main():
         outdir.mkdir(parents=True, exist_ok=True)
 
         # changing the size of the images
-        # vf = f"fps={N}/4,scale={SIZE}:{SIZE}:flags=lanczos"
         vf = f"fps={N}/4,scale={SIZE}:-1:flags=lanczos,pad={SIZE}:{SIZE}:(ow-iw)/2:(oh-ih)/2"
 
         outpat = str(outdir / "%04d.jpg")
