@@ -50,7 +50,9 @@ def extract_frames(
         outdir.mkdir(parents=True, exist_ok=True)
 
         # fps is frames_per_4s / 4 for consistency with the original script
-        vf = f"fps={frames_per_4s}/4,scale={size}:-1:flags=lanczos,pad={size}:{size}:(ow-iw)/2:(oh-ih)/2"
+        # Use 'force_original_aspect_ratio=decrease' to handle both portrait and landscape videos
+        # Then pad to center the result in a square
+        vf = f"fps={frames_per_4s}/4,scale={size}:{size}:force_original_aspect_ratio=decrease:flags=lanczos,pad={size}:{size}:(ow-iw)/2:(oh-ih)/2"
 
         outpat = str(outdir / "%04d.jpg")
         if verbose:
@@ -63,8 +65,11 @@ def extract_frames(
             saved_counts[mp4] = len(list(outdir.glob("*.jpg")))
             continue
 
+        # Add format=yuvj420p to handle non-standard YUV color formats
+        vf_with_format = vf + ",format=yuvj420p"
+        
         proc = subprocess.run(
-            [ffmpeg_bin, "-y", "-i", mp4, "-vf", vf, outpat],
+            [ffmpeg_bin, "-y", "-i", mp4, "-vf", vf_with_format, outpat],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             text=True,
