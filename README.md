@@ -1,16 +1,16 @@
-# CS171_project
+# West Coast Swing Dance Analysis
 
-### Project Title
+## Project Title
 **Analyzing West Coast Swing Patterns Using Video Classification**
-### Authors
--   Ania Niedzialek
--   Nguyen Pham
-### Research Topic
-This project focuses on applying machine learning and computer vision to analyze movement patterns in West Coast Swing (WCS) dance videos.  
-The goal is to detect and compare specific dance patterns—such as Sugar Push and Sugar Tag—across different competition divisions (e.g., Newcomer, Intermediate, Advanced, All-Star, Champion).  
-We aim to identify stylistic differences and explore whether measurable motion features correlate with dancer experience level, ultimately suggesting data-driven feedback for improvement.
 
-### Project Outline/Plan
+## Authors
+- Ania Niedzialek
+- Nguyen Pham
+
+## Research Topic
+This project focuses on applying machine learning and computer vision to analyze movement patterns in West Coast Swing (WCS) dance videos. The goal is to detect and compare specific dance patterns—such as Sugar Push and Sugar Tag—across different competition divisions (e.g., Newcomer, Intermediate, Advanced, All-Star, Champion). We aim to identify stylistic differences and explore whether measurable motion features correlate with dancer experience level, ultimately suggesting data-driven feedback for improvement.
+
+## Project Outline
 1. **Data Preparation**
    - Collect short, clearly defined video clips of Sugar Push and Sugar Tag patterns from publicly available YouTube footage or self-recorded examples.
    - Extract pose keypoints using MediaPipe for temporal analysis.
@@ -27,11 +27,11 @@ We aim to identify stylistic differences and explore whether measurable motion f
    - Analyze temporal importance patterns and division-specific movement characteristics.
    - Visualize model attention and sequence-level predictions.
 5. **Deliverables**
-   - Final report with 35% accuracy achievement (75% improvement over random baseline)
+   - Final report with classification accuracy analysis
    - Trained LSTM model with temporal analysis capabilities
    - Comprehensive visualization notebook with temporal importance analysis
 
-### Data Collection Plan
+## Data Collection Plan
 - **Sources:** Publicly available WCS competition clips on YouTube, with credit and citation.  
 - **Preprocessing:**
   - Download video segments using `yt-dlp`
@@ -43,8 +43,8 @@ We aim to identify stylistic differences and explore whether measurable motion f
   - Avoid private or monetized content.
 
 ---
-### Model Architecture
-#### Final Model — Keypoints + LSTM (Temporal Analysis)
+## Model Architecture
+### Final Model — Keypoints + LSTM (Temporal Analysis)
 - **Architecture:**  
   - **Input Layer**: 99 features per frame (33 keypoints × 3 coordinates)
   - **LSTM Layers**: 2-layer LSTM with 128 hidden units, dropout=0.3
@@ -54,8 +54,8 @@ We aim to identify stylistic differences and explore whether measurable motion f
   - 4-fold stratified cross-validation (balanced class distribution)
   - Learning rate scheduling with ReduceLROnPlateau
   - Data augmentation with random noise injection
-- **Performance:** 35% cross-validation accuracy (75% improvement over 20% random baseline)
-### Project Timeline
+- **Performance:** 35% cross-validation accuracy
+## Project Timeline
 | Week | Milestone | Description |
 |------|------------|-------------|
 | 10/13 | Topic Approval & Setup | Finalize the research question, confirm tools (PyTorch, MediaPipe, ffmpeg), and collect initial reference videos for WCS patterns. |
@@ -68,61 +68,65 @@ Updates:
 - Collected dance videos for 5 divisions (4 samples each)
 - Extracted 3D pose keypoints using MediaPipe (33 keypoints × 4 dimensions)
 - Implemented LSTM model with temporal sequence analysis
-- Achieved 35% cross-validation accuracy (75% improvement over random baseline)
+- Achieved 35% cross-validation accuracy
 - Developed comprehensive temporal importance visualization
 
-### Notebooks Description
-#### Notebook 1 - 01_data_collection.ipynb
-purpose: Collects raw dance clips from YouTube and organizes them for modeling.
-The notebook:
-- extracts YouTube video IDs from different URL formats
-- downloads trimmed video segmens
-- creates and updates labels.csv with division, pattern, start time, duration, metadata
-- organizes dataset folders by division
-- batch-downloads all labeled clips
+## Notebooks Description
+#### Notebook 1 - `01_data_collection.ipynb`
+**Purpose:** Collects raw dance clips from YouTube and organizes them for modeling.
 
-#### Notebook 2 - 02_train.ipynb
-purpose: Train LSTM model on 3D pose keypoints for division classification.
 The notebook:
-- loads 3D pose keypoints from .npy files (33 keypoints × 4 dimensions)
-- implements KeypointsDataset class with data augmentation
-- builds LSTM architecture for temporal sequence analysis
-- uses 4-fold stratified cross-validation with balanced class distribution
-- applies advanced training techniques (LR scheduling, early stopping, regularization)
-- achieves 35% cross-validation accuracy (75% improvement over random baseline)
-- saves final model with temporal analysis capabilities
+- Extracts YouTube video IDs from different URL formats
+- Downloads trimmed video segments
+- Creates and updates `labels.csv` with division, pattern, start time, duration, metadata
+- Organizes dataset folders by division
+- Batch-downloads all labeled clips
 
-#### Notebook 3 - 03_analyze_keypoints.ipynb
-purpose: analyze dancer movements using pose/keypoint data with statistical features.
+#### Notebook 2 - `02_train.ipynb`
+**Purpose:** Train LSTM model on 3D pose keypoints for division classification.
+
 The notebook:
-- loads keypoint .npy files from each video
-- cleans missing keypoints via interpolation
-- calculates engineered features (angles, distances, velocities)
-- aggregates features for traditional ML classification
-- performs PCA and t-SNE visualization of movement patterns
-- implements Decision Tree classifier for comparison with LSTM approach
+- Loads 3D pose keypoints from `.npy` files (33 keypoints × 4 dimensions)
+- Implements `KeypointsDataset` class with data augmentation
+- Builds LSTM architecture for temporal sequence analysis
+- Uses 4-fold stratified cross-validation with balanced class distribution
+- Applies advanced training techniques (LR scheduling, early stopping, regularization)
+- Achieves 35% cross-validation accuracy
+- Saves final model with temporal analysis capabilities
 
-#### Notebook 4 - 04_cnn_analysis_visualization.ipynb
-purpose: analyze the trained LSTM model's temporal behavior and predictions.
+#### Notebook 3 - `03_analyze_keypoints.ipynb`
+**Purpose:** Analyze dancer movements using pose/keypoint data with statistical features.
+
+The notebook:
+- Loads keypoint `.npy` files from each video
+- Cleans missing keypoints via interpolation
+- Calculates engineered features (angles, distances, velocities)
+- Aggregates features for traditional ML classification
+- Performs PCA and t-SNE visualization of movement patterns
+- Implements Decision Tree classifier for comparison with LSTM approach
+- Achieves 100% accuracy on keypoints_2 data for sugar_push vs sugar_tag classification
+
+#### Notebook 4 - `04_lstm_analysis.ipynb`
+**Purpose:** Analyze the trained LSTM model's temporal behavior and predictions.
+
 This notebook:
-- loads trained LSTM model with 3D keypoint processing
-- makes predictions on test sequences with temporal preprocessing
-- generates confusion matrix and division-level performance metrics
-- performs temporal importance analysis (which time steps matter most)
-- visualizes keypoint trajectories and Z-axis movement patterns
-- provides comprehensive sequence-level interpretation and analysis
+- Loads trained LSTM model with 3D keypoint processing
+- Makes predictions on test sequences with temporal preprocessing using keypoints_2 data
+- Generates confusion matrix and division-level performance metrics
+- Performs temporal importance analysis (which time steps matter most)
+- Visualizes keypoint trajectories and Z-axis movement patterns
+- Provides comprehensive sequence-level interpretation and analysis
 
-### .gitignore and License
-**.gitignore - updated**
+## .gitignore and License
+**.gitignore**
 venv
 .DS_Store
 *.mp4
 data/raw/videos/
 .env
-notebooks/.ipynb_checkpoints/01_data_collection-checkpoint.ipynb
-notebooks/sanity_check.py
-__pycache__/.ipynb_checkpoints/
-models/*path
+notebooks/.ipynb_checkpoints/
+__pycache__/
+models/*
 
 
 **License:** MIT License — open for academic and research use only.
