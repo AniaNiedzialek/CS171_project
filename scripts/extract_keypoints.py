@@ -139,25 +139,3 @@ def extract_keypoints(
         print("Extraction complete.")
 
     return results
-
-
-def main():
-    parser = argparse.ArgumentParser(description="Extract pose keypoints from frames using MediaPipe.")
-    parser.add_argument("--static_mode", action="store_true", help="Set to true if frames are unrelated (slower but maybe more accurate per frame)")
-    parser.add_argument("--input_dir", default=INPUT_DIR)
-    parser.add_argument("--output_dir", default=OUTPUT_DIR)
-    parser.add_argument("--model_complexity", type=int, default=2)
-    parser.add_argument("--min_detection_confidence", type=float, default=0.5)
-    args = parser.parse_args()
-
-    extract_keypoints(
-        input_dir=args.input_dir,
-        output_dir=args.output_dir,
-        static_mode=args.static_mode,
-        model_complexity=args.model_complexity,
-        min_detection_confidence=args.min_detection_confidence,
-        verbose=True,
-    )
-
-if __name__ == "__main__":
-    main()

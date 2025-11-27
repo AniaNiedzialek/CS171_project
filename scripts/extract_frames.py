@@ -89,29 +89,3 @@ def extract_frames(
     if verbose:
         print("Done!")
     return saved_counts
-
-
-def main():
-    parser = argparse.ArgumentParser(description="Extract frames from videos using ffmpeg.")
-    parser.add_argument("--in", dest="input_dir", default="data/raw/videos")
-    parser.add_argument("--out", dest="output_dir", default="data/frames")
-    parser.add_argument("--frames", dest="frames_per_4s", type=int, default=12)
-    parser.add_argument("--size", dest="size", type=int, default=512)
-    parser.add_argument("--overwrite", dest="overwrite", action="store_true")
-    parser.add_argument("--quiet", dest="quiet", action="store_true")
-    parser.add_argument("--ffmpeg", dest="ffmpeg_bin", default=None)
-    args = parser.parse_args()
-
-    extract_frames(
-        args.input_dir,
-        args.output_dir,
-        frames_per_4s=args.frames_per_4s,
-        size=args.size,
-        overwrite=args.overwrite,
-        verbose=not args.quiet,
-        ffmpeg_bin=args.ffmpeg_bin,
-    )
-
-
-if __name__ == "__main__":
-    _cli_main()
