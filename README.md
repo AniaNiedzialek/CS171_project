@@ -84,11 +84,18 @@ This project applies machine learning and computer vision to analyze movement pa
 | Week  | Milestone              | Description                                                       |
 | ----- | ---------------------- | ----------------------------------------------------------------- |
 | 10/27 | Topic Approval & Setup | Finalize research question, confirm tools, gather initial videos. |
-| 11/3 | Data Collection        | Download and trim clips, build labels.csv.                         |
+| 11/03 | Data Collection        | Download and trim clips, build labels.csv.                        |
 | 11/10 | Dataset Prep           | Extract 3D keypoints, standardize sequences, augment data.        |
 | 11/17 | Model Training         | Train LSTM with cross‑validation.                                 |
 | 11/24 | Evaluation & Report    | Visualizations, temporal analysis, final updates.                 |
-| 12/01 | Presentation           | Presentation and project preprecoded demo                         |
+| 12/01 | Presentation           | Presentation and project prerecorded demo.                        |
+
+------|------------|-------------|
+| 10/13 | Topic Approval & Setup | Finalize research question, confirm tools, gather initial videos. |
+| 10/20 | Data Collection | Download and trim clips, build labels.csv. |
+| 10/27 | Dataset Prep | Extract 3D keypoints, standardize sequences, augment data. |
+| 11/03 | Model Training | Train LSTM with cross‑validation. |
+| 11/10 | Evaluation & Report | Visualizations, temporal analysis, final report. |
 
 ---
 
@@ -106,72 +113,44 @@ This project applies machine learning and computer vision to analyze movement pa
 
 ## Notebook 1 — `01_data_collection.ipynb`
 
-**Purpose:** Automates downloading, labeling, organizing, and preprocessing raw video data.
+**Focus:** Build and organize the dataset.
 
-### Main Components
-
-#### **Imports**
-
-Handles filesystem ops, YouTube downloads, URL parsing, and keypoint extraction helpers.
-
-#### **Download Videos**
-
-`download_video(url, name, output_path, start_time, duration)`
-
-* Downloads specific segments using `yt-dlp`'s `download_ranges`.
-* Saves clips to a structured dataset folder.
-
-#### **Extract YouTube ID**
-
-`extract_youtube_id(url)` handles:
-
-* Standard YouTube links
-* Shorts
-* Embed formats
-* youtu.be links
-
-#### **Create Labels**
-
-`add_label(...)`:
-
-* Creates or appends rows to `labels.csv`.
-* Fields include: youtube_id, start_time, duration, division, pattern, labels.
-
-#### **Batch Download Function**
-
-`download_all_from_csv(csv_path, folder)`:
-
-* Iterates through CSV rows
-* Creates division‑specific folders
-* Downloads trimmed clips
-* Supports multiple datasets (`videos_1`, `videos_2`)
-
-#### **Frame & Keypoint Extraction**
-
-After downloading:
-
-* `extract_frames(...)` extracts RGB frames.
-* `extract_keypoints(...)` extracts MediaPipe pose data.
-
----
+* Download YouTube clips, trim with time ranges.
+* Maintain `labels.csv` (division, pattern, timestamps).
+* Extract frames + MediaPipe keypoints.
+* Organize videos into structured folders.
 
 ## Notebook 2 — `02_train.ipynb`
 
-Training of LSTM classifier using 3D pose keypoints.
+**Focus:** Train the LSTM division classifier.
 
----
+* Load 3D keypoints (X, Y, Z).
+* Apply augmentation + fixed 32-frame sequences.
+* Train 2-layer LSTM using 4-fold stratified cross-validation.
+* Save final model with metadata.
 
 ## Notebook 3 — `03_analyze_keypoints.ipynb`
 
-Statistical feature analysis, PCA/t‑SNE, traditional ML comparison.
+**Focus:** Traditional ML + engineered motion features.
 
----
+* Clean & normalize sequences.
+* Compute angles, distances, and velocity features.
+* PCA/t-SNE visualization of Sugar Push vs Sugar Tag.
+* Train a Decision Tree classifier (near-perfect accuracy).
+* Save deployable scikit-learn pipeline.
 
 ## Notebook 4 — `04_lstm_analysis.ipynb`
 
-Model interpretation: temporal importance, confusion matrix, trajectory plots.
+**Focus:** Interpret and evaluate the LSTM model.
+
+* Predict divisions on new sequences.
+* Generate confusion matrix + misclassification analysis.
+* Compute **temporal importance curves** from LSTM hidden states.
+* Visualize motion trajectories (XY & Z).
+* Assess per-division accuracy and confidence.
 
 ---
+
 
 # .gitignore
 
