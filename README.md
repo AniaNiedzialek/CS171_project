@@ -83,11 +83,12 @@ This project applies machine learning and computer vision to analyze movement pa
 
 | Week  | Milestone              | Description                                                       |
 | ----- | ---------------------- | ----------------------------------------------------------------- |
-| 10/13 | Topic Approval & Setup | Finalize research question, confirm tools, gather initial videos. |
-| 10/20 | Data Collection        | Download and trim clips, build labels.csv.                        |
-| 10/27 | Dataset Prep           | Extract 3D keypoints, standardize sequences, augment data.        |
-| 11/03 | Model Training         | Train LSTM with cross‑validation.                                 |
-| 11/10 | Evaluation & Report    | Visualizations, temporal analysis, final report.                  |
+| 10/27 | Topic Approval & Setup | Finalize research question, confirm tools, gather initial videos. |
+| 11/3 | Data Collection        | Download and trim clips, build labels.csv.                         |
+| 11/10 | Dataset Prep           | Extract 3D keypoints, standardize sequences, augment data.        |
+| 11/17 | Model Training         | Train LSTM with cross‑validation.                                 |
+| 11/24 | Evaluation & Report    | Visualizations, temporal analysis, final updates.                 |
+| 12/01 | Presentation           | Presentation and project preprecoded demo                         |
 
 ---
 
