@@ -4,14 +4,39 @@
 
 **Analyzing West Coast Swing Patterns Using Video Classification**
 
-## Authors
+## Authors & Project Roles
 
-* Ania Niedzialek
-* Nguyen Pham
+| Author | Role | Notebooks |
+|--------|------|-----------|
+| **Nguyen Pham** | Decision Tree Model Development | `01a_data_process.ipynb`, `02a_train.ipynb` |
+| **Ania Niedzialek** | LSTM Model Development | `01b_data_process.ipynb`, `02b_train.ipynb` |
+| **Both** | Analysis & Visualization | `03_visualization_analysis.ipynb` |
 
 ## Research Topic
 
 This project applies machine learning and computer vision to analyze movement patterns in West Coast Swing (WCS) dance videos. We focus on detecting and comparing specific patterns—such as Sugar Push and Sugar Tag—across competition divisions (Newcomer, Intermediate, Advanced, All-Star, Champion). Our goals include identifying stylistic differences across experience levels and exploring whether motion features can support data‑driven feedback for dancers.
+
+---
+
+## Installation Instructions
+
+### Prerequisites
+- Python 3.8+
+- pip or conda package manager
+
+### Setup
+```bash
+# Clone the repository
+git clone https://github.com/AniaNiedzialek/CS171_project.git
+cd CS171_project
+
+# Create virtual environment 
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+```
 
 ---
 
@@ -103,56 +128,36 @@ This project applies machine learning and computer vision to analyze movement pa
 
 * Collected videos for 5 divisions (4 per class)
 * Extracted 3D MediaPipe keypoints
-* Implemented LSTM classification model
-* Achieved **35% CV accuracy**
+* Implemented LSTM classification model (Ania)
+* Implemented Decision Tree classifier (Nguyen)
 * Added temporal importance visualizations
 
 ---
 
-# Notebooks Overview
+## Notebooks Overview
 
-## Notebook 1 — `01_data_collection.ipynb`
+### Data Preprocessing (2 notebooks)
 
-**Focus:** Build and organize the dataset.
+| Notebook | Author | Description |
+|----------|--------|-------------|
+| `01a_data_process.ipynb` | Nguyen Pham | Data preprocessing for Decision Tree model - downloads videos, extracts keypoints, engineers features |
+| `01b_data_process.ipynb` | Ania Niedzialek | Data preprocessing for LSTM model - downloads videos, extracts temporal keypoint sequences |
 
-* Download YouTube clips, trim with time ranges.
-* Maintain `labels.csv` (division, pattern, timestamps).
-* Extract frames + MediaPipe keypoints.
-* Organize videos into structured folders.
+### Model Construction (2 notebooks)
 
-## Notebook 2 — `02_train.ipynb`
+| Notebook | Author | Description |
+|----------|--------|-------------|
+| `02a_train.ipynb` | Nguyen Pham | Decision Tree training - feature engineering, model training, evaluation |
+| `02b_train.ipynb` | Ania Niedzialek | LSTM training - sequence modeling, cross-validation, temporal classification |
 
-**Focus:** Train the LSTM division classifier.
+### Analysis & Visualization (1 collaborative notebook)
 
-* Load 3D keypoints (X, Y, Z).
-* Apply augmentation + fixed 32-frame sequences.
-* Train 2-layer LSTM using 4-fold stratified cross-validation.
-* Save final model with metadata.
-
-## Notebook 3 — `03_analyze_keypoints.ipynb`
-
-**Focus:** Traditional ML + engineered motion features.
-
-* Clean & normalize sequences.
-* Compute angles, distances, and velocity features.
-* PCA/t-SNE visualization of Sugar Push vs Sugar Tag.
-* Train a Decision Tree classifier (near-perfect accuracy).
-* Save deployable scikit-learn pipeline.
-
-## Notebook 4 — `04_lstm_analysis.ipynb`
-
-**Focus:** Interpret and evaluate the LSTM model.
-
-* Predict divisions on new sequences.
-* Generate confusion matrix + misclassification analysis.
-* Compute **temporal importance curves** from LSTM hidden states.
-* Visualize motion trajectories (XY & Z).
-* Assess per-division accuracy and confidence.
+| Notebook | Authors | Description |
+|----------|---------|-------------|
+| `03_visualization_analysis.ipynb` | Both | Model analysis, confusion matrices, temporal importance, model comparison |
 
 ---
-
-
-# .gitignore
+## .gitignore
 
 ```
 venv
