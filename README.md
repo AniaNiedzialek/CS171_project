@@ -1,36 +1,52 @@
-# West Coast Swing Dance Analysis
+# West Coast Swing Dance Classification
 
-## Project Title
+## CS 171 Final Project
 
-**Analyzing West Coast Swing Patterns Using Video Classification**
+---
+
+## Research Question
+
+**Can we classify West Coast Swing dance performances by skill division and dance pattern using pose estimation keypoints extracted from video?**
+
+Specifically, we investigate:
+1. **Division Classification**: Can an LSTM model learn temporal movement patterns that distinguish dancers across skill levels (Novice → Champion)?
+2. **Pattern Classification**: Can a Decision Tree identify which body part movements (e.g., wrist position variability) differentiate Sugar Push from Sugar Tag patterns?
+
+---
 
 ## Authors & Project Roles
 
-| Author | Role | Notebooks |
-|--------|------|-----------|
-| **Nguyen Pham** | Decision Tree Model Development | `01a_data_process.ipynb`, `02a_train.ipynb` |
-| **Ania Niedzialek** | LSTM Model Development | `01b_data_process.ipynb`, `02b_train.ipynb` |
-| **Both** | Analysis & Visualization | `03_visualization_analysis.ipynb` |
+| Author | Role | Responsibilities |
+|--------|------|------------------|
+| **Nguyen Pham** | Decision Tree Model Development | Data preprocessing (`01a_data_process.ipynb`), Decision Tree training (`02a_train.ipynb`), feature engineering, pattern classification |
+| **Ania Niedzialek** | LSTM Model Development | Data preprocessing (`01b_data_process.ipynb`), LSTM training (`02b_train.ipynb`), temporal sequence modeling, division classification |
+| **Both (Collaborative)** | Analysis & Visualization | `03_visualization_analysis.ipynb` - model evaluation, temporal importance analysis, feature importance visualization |
 
-## Research Topic
+---
 
-This project applies machine learning and computer vision to analyze movement patterns in West Coast Swing (WCS) dance videos. We focus on detecting and comparing specific patterns—such as Sugar Push and Sugar Tag—across competition divisions (Newcomer, Intermediate, Advanced, All-Star, Champion). Our goals include identifying stylistic differences across experience levels and exploring whether motion features can support data‑driven feedback for dancers.
+## Key Findings
+
+### Decision Tree - Pattern Classification (Sugar Push vs Sugar Tag)
+- **Top Feature**: `std(right_wrist_Y)` accounts for nearly 100% of classification importance
+- **Interpretation**: The variability in vertical wrist movement is the primary distinguishing factor between Sugar Push and Sugar Tag patterns
+- **Why it makes sense**: Sugar Push involves pushing motions while Sugar Tag involves tagging/reaching motions - both heavily involve wrist positioning
+
+### LSTM - Division Classification
+- **Temporal Importance**: Middle frames (around frame 15-20 of 32) show highest importance for division classification
+- **Interpretation**: The core execution phase of dance patterns contains the most skill-differentiating information
+- **Finding**: Higher-level dancers show more consistent temporal patterns compared to novice dancers
 
 ---
 
 ## Installation Instructions
 
-### Prerequisites
-- Python 3.8+
-- pip or conda package manager
 
-### Setup
 ```bash
 # Clone the repository
 git clone https://github.com/AniaNiedzialek/CS171_project.git
 cd CS171_project
 
-# Create virtual environment 
+# Create virtual environment
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 
@@ -40,136 +56,58 @@ pip install -r requirements.txt
 
 ---
 
-## Project Outline
+## Data Access Statement
 
-### 1. Data Preparation
-
-* Collect short, well‑defined video clips of Sugar Push and Sugar Tag patterns.
-* Extract pose keypoints using MediaPipe for temporal analysis.
-
-### 2. Feature Extraction
-
-* Extract 33 pose keypoints with (X, Y, Z, confidence).
-* Standardize sequences to 32 frames.
-
-### 3. Model Training
-
-* LSTM neural network for classifying dance divisions.
-* **Input:** 32 frames × (33 keypoints × 3 coordinates).
-* **Output:** 5 division classes.
-* Use data augmentation, cross‑validation, and regularization.
-
-### 4. Evaluation
-
-* Stratified cross‑validation.
-* Temporal importance analysis.
-* Sequence‑level attention visualization.
-
-### 5. Deliverables
-
-* Final report
-* Trained LSTM model
-* Visualization notebook for movement analysis
-
----
-
-## Data Collection Plan
-
-### Sources
-
-* Public WCS competition footage on YouTube.
-
-### Preprocessing
-
-* Download using `yt-dlp`.
-* Trim clips to 3–6 seconds using `ffmpeg`.
-* Extract MediaPipe pose keypoints.
-* Save standardized `.npy` sequences.
-
-### Ethics
-
-* Use only public or self‑recorded videos.
-
----
-
-## Model Architecture
-
-### LSTM Temporal Model
-
-* **Input:** 99 features per frame (33 keypoints × 3 coordinates)
-* **LSTM:** 2 layers × 128 units, dropout 0.3
-* **Output:** 5 division classes
-* **Training:** LR scheduling, early stopping, augmentation
-* **Performance:** ~35% CV accuracy
-
----
-
-## Project Timeline
-
-| Week  | Milestone              | Description                                                       |
-| ----- | ---------------------- | ----------------------------------------------------------------- |
-| 10/27 | Topic Approval & Setup | Finalize research question, confirm tools, gather initial videos. |
-| 11/03 | Data Collection        | Download and trim clips, build labels.csv.                        |
-| 11/10 | Dataset Prep           | Extract 3D keypoints, standardize sequences, augment data.        |
-| 11/17 | Model Training         | Train LSTM with cross‑validation.                                 |
-| 11/24 | Evaluation & Report    | Visualizations, temporal analysis, final updates.                 |
-| 12/01 | Presentation           | Presentation and project prerecorded demo.                        |
-
-------|------------|-------------|
-| 10/13 | Topic Approval & Setup | Finalize research question, confirm tools, gather initial videos. |
-| 10/20 | Data Collection | Download and trim clips, build labels.csv. |
-| 10/27 | Dataset Prep | Extract 3D keypoints, standardize sequences, augment data. |
-| 11/03 | Model Training | Train LSTM with cross‑validation. |
-| 11/10 | Evaluation & Report | Visualizations, temporal analysis, final report. |
-
----
-
-## Current Updates
-
-* Collected videos for 5 divisions (4 per class)
-* Extracted 3D MediaPipe keypoints
-* Implemented LSTM classification model (Ania)
-* Implemented Decision Tree classifier (Nguyen)
-* Added temporal importance visualizations
+### Data Sources
+- **Training Data**: Public West Coast Swing competition videos from YouTube
+- **Extraction Method**: Videos downloaded using `yt-dlp`, trimmed with `ffmpeg`
+- **Pose Estimation**: MediaPipe Pose extracts 33 body landmarks with (X, Y, Z, visibility) per frame
 
 ---
 
 ## Notebooks Overview
 
-### Data Preprocessing (2 notebooks)
+### Data Preprocessing 
 
 | Notebook | Author | Description |
 |----------|--------|-------------|
-| `01a_data_process.ipynb` | Nguyen Pham | Data preprocessing for Decision Tree model - downloads videos, extracts keypoints, engineers features |
-| `01b_data_process.ipynb` | Ania Niedzialek | Data preprocessing for LSTM model - downloads videos, extracts temporal keypoint sequences |
+| `01a_data_process.ipynb` | Nguyen Pham | Downloads videos, extracts MediaPipe keypoints, engineers statistical features (angles, velocities, pairwise distances) for Decision Tree |
+| `01b_data_process.ipynb` | Ania Niedzialek | Downloads videos, extracts temporal keypoint sequences, standardizes to 32 frames for LSTM |
 
-### Model Construction (2 notebooks)
+### Model Construction 
 
 | Notebook | Author | Description |
 |----------|--------|-------------|
-| `02a_train.ipynb` | Nguyen Pham | Decision Tree training - feature engineering, model training, evaluation |
-| `02b_train.ipynb` | Ania Niedzialek | LSTM training - sequence modeling, cross-validation, temporal classification |
+| `02a_train.ipynb` | Nguyen Pham | Decision Tree classifier for pattern classification (Sugar Push vs Sugar Tag). Features: aggregated mean/std of keypoints, angles, distances, velocities |
+| `02b_train.ipynb` | Ania Niedzialek | LSTM neural network for division classification. Architecture: 2-layer LSTM (128 units), cross-validation, early stopping |
 
-### Analysis & Visualization (1 collaborative notebook)
+### Analysis & Visualization
 
 | Notebook | Authors | Description |
 |----------|---------|-------------|
-| `03_visualization_analysis.ipynb` | Both | Model analysis, confusion matrices, temporal importance, model comparison |
+| `03_visualization_analysis.ipynb` | Both | Confusion matrices, temporal importance analysis (LSTM), feature importance with body part names (Decision Tree), performance comparison |
 
 ---
-## .gitignore
 
-```
-venv
-.DS_Store
-*.mp4
-data/raw/videos/
-.env
-notebooks/.ipynb_checkpoints/
-__pycache__/
-models/*
-```
+## Model Architectures
 
-# License
+### Decision Tree (Pattern Classification)
+- **Task**: Classify Sugar Push vs Sugar Tag patterns
+- **Input**: 460 features (mean + std of: 99 keypoint coords, 4 joint angles, 28 pairwise distances, 99 velocities)
+- **Output**: Binary classification (sugar_push / sugar_tag)
+- **Key Finding**: Right wrist Y-position variability is the dominant feature
+
+### LSTM (Division Classification)
+- **Task**: Classify dancer skill level (5 divisions)
+- **Input**: 32 frames × 99 features (33 keypoints × 3 coordinates)
+- **Architecture**: 2-layer LSTM, 128 hidden units, dropout 0.3
+- **Output**: 5 classes (novice, intermediate, advanced, allstar, champion)
+- **Training**: 4-fold stratified cross-validation, learning rate scheduling
+
+## Ethics
+
+* Use only public or self‑recorded videos.
+
+## License
 
 MIT License — open for academic and research use.
